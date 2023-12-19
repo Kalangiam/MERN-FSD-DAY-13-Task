@@ -1,0 +1,23 @@
+.container{
+    background-color:whitesmoke;
+    margin: 30px 10px;
+   
+   
+}
+h4{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container1{
+    background-color:aliceblue;
+    margin-right:100px;
+    margin-left: 100px;
+}
+
+table{
+    border: 2px solid black;
+    width:100%;
+}
+th,td{
+    border: 2px solid black;
+}
