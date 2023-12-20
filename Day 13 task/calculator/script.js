@@ -1,70 +1,88 @@
-function d1(){
-var one=parseInt(document.getElementById("button13").value);
-var d =document.getElementById("d");
-d_one=d.append(one);
-document.body.append(d_one);
+const calculatorScreen = document.querySelector('.calculator-screen')
+
+const updateScreen = (number) => {
+	calculatorScreen.value=number
 }
-function d2(){
-    var two=parseInt(document.getElementById("button14").value);
-    var d =document.getElementById("d");
-    d_two=d.append(two);
-    document.body.append(d_two);
+
+const numbers=document.querySelectorAll(".number")
+
+let prevInput='0'
+let calOperator= ''
+let currentInp='0'
+
+const inputNumber = (number)=>{
+	if(currentInput==='0'){
+		currentInput=number
+	} else {
+		currentInput=currentInput+number
+	}
 }
-function d3(){
-    var three=parseInt(document.getElementById("button15").value);
-    var d =document.getElementById("d");
-    d_three=d.append(three);
-    document.body.append(d_three);
+
+numbers.forEach((number)=>{
+	number.addEventListener("click",(event)=>{
+		inputNumber(event.target.value)
+		updateScreen(currentInput)
+	})
+})
+
+const operators = document.querySelectorAll(".operator")
+const inputOperator = (operator) => {
+    prevInput = currentInput
+    calculationOperator =  operator
+    updateScreen(operator)
+    currentInput = '0'
 }
-function d4(){
-    var four=parseInt(document.getElementById("button9").value);
-    var d =document.getElementById("d");
-    d_four=d.append(four);
-    document.body.append(four);
+operators.forEach((operator) => {
+    operator.addEventListener("click", (event) => {
+        inputOperator(event.target.value)
+    })
+})
+
+const equalSign = document.querySelector('.equal-sign')
+
+equalSign.addEventListener("click", () => {
+    calculate();
+    updateScreen(currentInput)
+})
+
+const calculate = () => {
+    let result = 0
+    switch(calculationOperator) {
+        case '+':
+            result = parseInt(prevInput) + parseInt(currentInput)
+            break
+        case '-':
+            result = parseInt(prevInput) - parseInt(currentInput)
+            break
+        case '*':
+            result = parseInt(prevInput) * parseInt(currentInput)
+            break
+        case '/':
+            result = parseInt(prevInput) / parseInt(currentInput)
+            break
+	case '%':
+            result = (parseInt(prevInput)/100)*parseInt(currentInput)
+            break
+        default:
+            return
+    }
+    currentInput = result.toString()
+    calculationOperator = ''
 }
-function d5(){
-    var five=parseInt(document.getElementById("button10").value);
-    var d =document.getElementById("d");
-    d_four=d.append(five);
-    document.body.append(five);
+
+const clearBtn = document.querySelector('.all-clear')
+
+clearBtn.addEventListener('click', () => {
+    console.log('Clear')
+})
+
+const clearAll = () => {
+    prevInput = '0'
+    calculationOperator = ''
+    currentInput = '0'
 }
-function d6(){
-    var six=parseInt(document.getElementById("button11").value);
-    var d =document.getElementById("d");
-    d_six=d.append(six);
-    document.body.append(six);
-}
-function d7(){
-    var seven=parseInt(document.getElementById("button5").value);
-    var d =document.getElementById("d");
-    d_seven=d.append(seven);
-    document.body.append(seven);
-}
-function d8(){
-    var eight=parseInt(document.getElementById("button6").value);
-    var d =document.getElementById("d");
-    d_eight=d.append(eight);
-    document.body.append(eight);
-}
-function d9(){
-    var nine=parseInt(document.getElementById("button7").value);
-    var d =document.getElementById("d");
-    d_nine=d.append(nine);
-    document.body.append(nine);
-}
-function add(){
-    var add=document.getElementById("button16").value;
-    var d =document.getElementById("d");
-    adds =d.append(add);
-    body.document.append(adds);
-    d_add = d.target.innerText;
-    d_adds=d.append(d_add);
-    document.body.append(d_adds);
-}
-function equals(){
-    var equal=document.getElementById("button19").value;
-    var d =document.getElementById("d");
-    d_equal=d.append(equal);
-    document.body.append(d_equal);
-    document.addEventListener("click",add)
-}
+
+clearBtn.addEventListener("click", () => {
+    clearAll()
+    updateScreen(currentInput)
+})
